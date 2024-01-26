@@ -4,7 +4,6 @@ document.getElementById('searchButton').addEventListener('click', function() {
     const city = document.getElementById('cityInput').value.trim();
     if (city) {
         getWeatherData(city);
-        getForecastData(city);
     } else {
         alert('Please enter a city name');
     }
@@ -26,7 +25,11 @@ function getWeatherData(city) {
         })
         .then(data => {
             console.log('Current Weather Data:', data)
+            console.log('Latitude: ', data.coord.lat);
+            console.log('Longitude: ', data.coord.lon);
+            getForecastData(data.coord.lat, data.coord.lon);
             displayCurrentWeather(data); //need to make this later
+
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
@@ -34,8 +37,9 @@ function getWeatherData(city) {
 
 }
 
-function getForecastData(city) {
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+
+function getForecastData(lat, lon) {
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
 
     fetch(forecastUrl)
         .then(response => {
@@ -70,3 +74,4 @@ function displayCurrentWeather(data) {
     weatherContainer.appendChild(cityHeader);
     weatherContainer.appendChild(temperature);
 }
+
