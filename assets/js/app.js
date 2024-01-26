@@ -66,9 +66,11 @@ function displayCurrentWeather(data) {
     //create child elements from data object
     const cityHeader = document.createElement('h3');
     cityHeader.textContent = `Current Weather in ${data.name}`;
+    cityHeader.classList.add('current-header');
 
     const temperature = document.createElement('p');
     temperature.textContent = `Temperature: ${data.main.temp} °F`;
+    temperature.classList.add('current-temp');
 
     //append children elements to parent container
     weatherContainer.appendChild(cityHeader);
@@ -86,10 +88,12 @@ function displayForecast(data) {
 
         //create child elements from data object
         const dateElement = document.createElement('p');
-        dateElement.textContent = `Date: ${new Date(forecastItem.dt_txt).toLocaleDateString()}`;
+        dateElement.textContent = `${new Date(forecastItem.dt_txt).toLocaleDateString()}`;
+        dateElement.classList.add('forecast-date');
 
         const tempElement = document.createElement('p');
         tempElement.textContent = `Temp: ${forecastItem.main.temp} °F`;
+        tempElement.classList.add('forecast-temp');
 
         //append children elements to parent container
         forecastContainer.appendChild(dateElement);
