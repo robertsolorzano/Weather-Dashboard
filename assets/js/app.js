@@ -1,10 +1,10 @@
 //Weather Dashaboard
-
 document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('searchButton').addEventListener('click', function() {
     const city = document.getElementById('cityInput').value.trim();
     if (city) {
-        getWeatherData(city); // Make sure this function is defined
+        getWeatherData(city);
+        getForecastData(city);
     } else {
         alert('Please enter a city name');
     }
@@ -26,7 +26,7 @@ function getWeatherData(city) {
             return response.json();
         })
         .then(data => {
-            console.log('Data:', data)
+            console.log('Current Weather Data:', data)
             displayCurrentWeather(data); //need to make this later
         })
         .catch(error => {
@@ -35,4 +35,21 @@ function getWeatherData(city) {
 
 }
 
+function getForecastData(city) {
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
 
+    fetch(forecastUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Forecast Data;' , data)
+            displayForecast(data); //need to make this later
+        })
+        .catch(error => {
+            console.error('Error fetching forecast data:', error);
+        });
+}
