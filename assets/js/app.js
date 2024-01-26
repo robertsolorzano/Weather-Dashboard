@@ -75,3 +75,25 @@ function displayCurrentWeather(data) {
     weatherContainer.appendChild(temperature);
 }
 
+function displayForecast(data) {
+    //create container inside #forecastContainer
+    const forecastContainer = document.getElementById('forecastContainer');
+    forecastContainer.innerHTML = ''; 
+
+    //for loop to iterate through forecast array(every 3 hours, incriment by 8 for 24 hour gaps)
+    for (let i = 0; i < data.list.length; i += 8) { 
+        const forecastItem = data.list[i];
+
+        //create child elements from data object
+        const dateElement = document.createElement('p');
+        dateElement.textContent = `Date: ${new Date(forecastItem.dt_txt).toLocaleDateString()}`;
+
+        const tempElement = document.createElement('p');
+        tempElement.textContent = `Temp: ${forecastItem.main.temp} °F`;
+
+        //append children elements to parent container
+        forecastContainer.appendChild(dateElement);
+        forecastContainer.appendChild(tempElement);
+
+    }
+}
