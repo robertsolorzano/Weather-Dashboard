@@ -12,7 +12,6 @@ document.getElementById('searchButton').addEventListener('click', function() {
 
 });
 
-
 const apiKey = '8f71d08fa9cb2980da4905c964414ed3';
 
 function getWeatherData(city) {
@@ -52,4 +51,22 @@ function getForecastData(city) {
         .catch(error => {
             console.error('Error fetching forecast data:', error);
         });
+}
+
+function displayCurrentWeather(data) {
+    //create container inside #currentWeather
+    const weatherContainer = document.getElementById('currentWeather');
+    //clear previous content
+    weatherContainer.innerHTML = '';
+
+    //create child elements from data object
+    const cityHeader = document.createElement('h3');
+    cityHeader.textContent = `Current Weather in ${data.name}`;
+
+    const temperature = document.createElement('p');
+    temperature.textContent = `Temperature: ${data.main.temp} °F`;
+
+    //append children elements to parent container
+    weatherContainer.appendChild(cityHeader);
+    weatherContainer.appendChild(temperature);
 }
