@@ -10,8 +10,9 @@ document.getElementById('searchButton').addEventListener('click', function() {
         alert('Please enter a city name');
     }
     });
-
+    displaySearchHistory();
 });
+
 
 //api call for current weather data from user search
 const apiKey = '8f71d08fa9cb2980da4905c964414ed3';
@@ -30,7 +31,9 @@ function getWeatherData(city) {
             console.log('Latitude: ', data.coord.lat);
             console.log('Longitude: ', data.coord.lon);
             getForecastData(data.coord.lat, data.coord.lon);
-            displayCurrentWeather(data); 
+            displayCurrentWeather(data);
+            localStorage.setItem(`weatherData_${city}`, JSON.stringify(data));
+            displaySearchHistory();
 
         })
         .catch(error => {
@@ -38,6 +41,7 @@ function getWeatherData(city) {
         });
 
 }
+
 
 //api call for forecasted data using current weather lat/lon
 function getForecastData(lat, lon) {
@@ -58,6 +62,7 @@ function getForecastData(lat, lon) {
             console.error('Error fetching forecast data:', error);
         });
 }
+
 
 //Display functions
 function displayCurrentWeather(data) {
@@ -89,6 +94,7 @@ function displayCurrentWeather(data) {
     weatherContainer.appendChild(windSpeed);
     weatherContainer.appendChild(humidity);
 }
+
 
 function displayForecast(data) {
     //create container inside #forecastContainer
@@ -127,5 +133,31 @@ function displayForecast(data) {
         forecastDayDiv.appendChild(humidity);
         forecastContainer.appendChild(forecastDayDiv);
 
+    }
+}
+
+function displaySearchHistory() {
+    const searchHistoryContainer = document.getElementById('searchHistory');
+    searchHistoryContainer.innerHTML = ''; 
+
+    // Loop through local storage
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        //check if key is in local storage
+        if (key.startsWith('weatherData_')) {
+            const city = key.split('_')[1];
+
+            //create button element for each city
+            const recentCity = document.createElement('button');
+            recentCity.textContent = city;
+            recentCity.classList.add('recent-City');
+            
+            //click listener to call main function 
+            recentCity.addEventListener('click', () => {
+                getWeatherData(city);
+            });
+
+            searchHistoryContainer.appendChild(recentCity);
+        }
     }
 }
