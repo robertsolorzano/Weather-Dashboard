@@ -39,14 +39,13 @@ section {
 }
 
 .current-weather {
-    margin-bottom: 200px;
+    margin-bottom: 50px;
 }
 
 #forecastContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 10px; 
+    gap: 20px; 
 }
 
 .forecast-day {
