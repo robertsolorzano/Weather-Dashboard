@@ -72,9 +72,19 @@ function displayCurrentWeather(data) {
     temperature.textContent = `Temperature: ${data.main.temp} °F`;
     temperature.classList.add('current-temp');
 
+    const windSpeed = document.createElement('p');
+    windSpeed.textContent = `Wind: ${data.wind.speed} mph`;
+    windSpeed.classList.add('current-windspeed'); //add directional later
+
+    const humidity = document.createElement('p');
+    humidity.textContent = `Humidity: ${data.main.humidity} %`;
+    humidity.classList.add('current-humidity');
+
     //append children elements to parent container
     weatherContainer.appendChild(cityHeader);
     weatherContainer.appendChild(temperature);
+    weatherContainer.appendChild(windSpeed);
+    weatherContainer.appendChild(humidity);
 }
 
 function displayForecast(data) {
