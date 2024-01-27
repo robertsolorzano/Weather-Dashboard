@@ -87,7 +87,7 @@ function displayCurrentWeather(data) {
     const humidity = document.createElement('p');
     humidity.textContent = `Humidity: ${data.main.humidity} %`;
     humidity.classList.add('current-humidity');
-    
+
     //added weather icon from weather array
     const weatherIcon = document.createElement('img');
     if(data.weather && data.weather.length > 0) {
@@ -133,7 +133,7 @@ function displayForecast(data) {
         windSpeed.classList.add('forecast-windspeed'); //add directional later
     
         const humidity = document.createElement('p');
-        humidity.textContent = `Humidity: ${forecastItem.main.humidity} %`;
+        humidity.textContent = `Humidity: ${forecastItem.main.humidity}%`;
         humidity.classList.add('forecast-humidity');
 
         //added weather icon from weather array
