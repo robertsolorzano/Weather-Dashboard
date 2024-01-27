@@ -1,4 +1,6 @@
-//Weather Dashaboard
+//Weather Dashaboard 1.0.0
+
+//event listener
 document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('searchButton').addEventListener('click', function() {
     const city = document.getElementById('cityInput').value.trim();
@@ -11,8 +13,8 @@ document.getElementById('searchButton').addEventListener('click', function() {
 
 });
 
+//api call for current weather data from user search
 const apiKey = '8f71d08fa9cb2980da4905c964414ed3';
-
 function getWeatherData(city) {
     const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`
 
@@ -28,7 +30,7 @@ function getWeatherData(city) {
             console.log('Latitude: ', data.coord.lat);
             console.log('Longitude: ', data.coord.lon);
             getForecastData(data.coord.lat, data.coord.lon);
-            displayCurrentWeather(data); //need to make this later
+            displayCurrentWeather(data); 
 
         })
         .catch(error => {
@@ -37,7 +39,7 @@ function getWeatherData(city) {
 
 }
 
-
+//api call for forecasted data using current weather lat/lon
 function getForecastData(lat, lon) {
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
 
@@ -50,13 +52,14 @@ function getForecastData(lat, lon) {
         })
         .then(data => {
             console.log('Forecast Data;' , data)
-            displayForecast(data); //need to make this later
+            displayForecast(data); 
         })
         .catch(error => {
             console.error('Error fetching forecast data:', error);
         });
 }
 
+//Display functions
 function displayCurrentWeather(data) {
     //create container inside #currentWeather
     const weatherContainer = document.getElementById('currentWeather');
@@ -109,9 +112,19 @@ function displayForecast(data) {
         tempElement.textContent = `Temp: ${forecastItem.main.temp} °F`;
         tempElement.classList.add('forecast-temp');
 
+        const windSpeed = document.createElement('p');
+        windSpeed.textContent = `Wind: ${forecastItem.wind.speed} mph`;
+        windSpeed.classList.add('forecast-windspeed'); //add directional later
+    
+        const humidity = document.createElement('p');
+        humidity.textContent = `Humidity: ${forecastItem.main.humidity} %`;
+        humidity.classList.add('forecast-humidity');
+
         //append children elements to parent container
         forecastDayDiv.appendChild(dateElement);
         forecastDayDiv.appendChild(tempElement);
+        forecastDayDiv.appendChild(windSpeed);
+        forecastDayDiv.appendChild(humidity);
         forecastContainer.appendChild(forecastDayDiv);
 
     }
