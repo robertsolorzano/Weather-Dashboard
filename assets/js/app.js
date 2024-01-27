@@ -147,17 +147,22 @@ function displaySearchHistory() {
         if (key.startsWith('weatherData_')) {
             const city = key.split('_')[1];
 
+            const recentCityContainer = document.createElement('div');
+            recentCityContainer.classList.add('recent-city')
+
             //create button element for each city
             const recentCity = document.createElement('button');
             recentCity.textContent = city;
-            recentCity.classList.add('recent-City');
+            recentCity.classList.add('recent-button');
             
             //click listener to call main function 
             recentCity.addEventListener('click', () => {
                 getWeatherData(city);
             });
 
-            searchHistoryContainer.appendChild(recentCity);
+            
+            recentCityContainer.appendChild(recentCity);
+            searchHistoryContainer.appendChild(recentCityContainer);
         }
     }
 }
