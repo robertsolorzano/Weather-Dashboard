@@ -87,9 +87,19 @@ function displayCurrentWeather(data) {
     const humidity = document.createElement('p');
     humidity.textContent = `Humidity: ${data.main.humidity} %`;
     humidity.classList.add('current-humidity');
+    
+    //added weather icon from weather array
+    const weatherIcon = document.createElement('img');
+    if(data.weather && data.weather.length > 0) {
+        const iconCode = data.weather[0].icon;
+        weatherIcon.src = `https://openweathermap.org/img/wn/${iconCode}.png`;
+        weatherIcon.alt = data.weather[0].description;
+        weatherIcon.classList.add('current-weather-icon');
+    }
 
     //append children elements to parent container
     weatherContainer.appendChild(cityHeader);
+    weatherContainer.appendChild(weatherIcon); 
     weatherContainer.appendChild(temperature);
     weatherContainer.appendChild(windSpeed);
     weatherContainer.appendChild(humidity);
@@ -126,9 +136,20 @@ function displayForecast(data) {
         humidity.textContent = `Humidity: ${forecastItem.main.humidity} %`;
         humidity.classList.add('forecast-humidity');
 
+        //added weather icon from weather array
+        const weatherIcon = document.createElement('img');
+        if(forecastItem.weather && forecastItem.weather.length > 0) {
+        const iconCode = forecastItem.weather[0].icon;
+        weatherIcon.src = `https://openweathermap.org/img/wn/${iconCode}.png`;
+        weatherIcon.alt = forecastItem.weather[0].description;
+        weatherIcon.classList.add('forecast-weather-icon');
+        forecastDayDiv.appendChild(weatherIcon);
+    }
+
         //append children elements to parent container
         forecastDayDiv.appendChild(dateElement);
         forecastDayDiv.appendChild(tempElement);
+        forecastDayDiv.appendChild(weatherIcon); 
         forecastDayDiv.appendChild(windSpeed);
         forecastDayDiv.appendChild(humidity);
         forecastContainer.appendChild(forecastDayDiv);
