@@ -39,7 +39,20 @@ section {
 }
 
 .current-weather {
-    margin-bottom: 200px; /* Adjust as needed */
+    margin-bottom: 200px;
 }
 
+#forecastContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px; 
+}
 
+.forecast-day {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}

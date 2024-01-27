@@ -86,6 +86,10 @@ function displayForecast(data) {
     for (let i = 0; i < data.list.length; i += 8) { 
         const forecastItem = data.list[i];
 
+        //create a div for each forecast card
+        const forecastDayDiv = document.createElement('div');
+        forecastDayDiv.classList.add('forecast-day');
+
         //create child elements from data object
         const dateElement = document.createElement('p');
         dateElement.textContent = `${new Date(forecastItem.dt_txt).toLocaleDateString()}`;
@@ -96,8 +100,9 @@ function displayForecast(data) {
         tempElement.classList.add('forecast-temp');
 
         //append children elements to parent container
-        forecastContainer.appendChild(dateElement);
-        forecastContainer.appendChild(tempElement);
+        forecastDayDiv.appendChild(dateElement);
+        forecastDayDiv.appendChild(tempElement);
+        forecastContainer.appendChild(forecastDayDiv);
 
     }
 }
