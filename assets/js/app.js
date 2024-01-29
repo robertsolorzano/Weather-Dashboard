@@ -103,6 +103,8 @@ function displayCurrentWeather(data) {
     weatherContainer.appendChild(temperature);
     weatherContainer.appendChild(windSpeed);
     weatherContainer.appendChild(humidity);
+    //
+    weatherContainer.style.display = 'block';
 }
 
 
