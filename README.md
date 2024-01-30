@@ -21,8 +21,7 @@ Weather Dashboard is a web application that allows users to search for current w
 3. **View Forecast**: A 5-day forecast is also shown, providing weather conditions for the upcoming days.
 4. **Access Search History**: Click on a city in the search history to quickly view weather information for that city again.
 
-#### Link to Website:
-[Weather-Dashboard](https://robertsolorzano.github.io/Weather-Dashboard/)
+Link to Website: [Weather-Dashboard](https://robertsolorzano.github.io/Weather-Dashboard/)
 
 ## Installation
 
