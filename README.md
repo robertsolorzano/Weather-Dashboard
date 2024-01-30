@@ -1,7 +1,7 @@
 # Weather-Dashboard
 ### A simple Weather Web App for users
 
-![preview](./assets/images/preview.jpeg)
+![preview](./assets/images/preview-crop.jpeg)
 
 ## Overview
 
